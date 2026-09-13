@@ -1,35 +1,44 @@
 
 
-Overview
+
+
+Inter-VLAN Routing + Multi-Area OSPF Project
+
+A Cisco Packet Tracer project demonstrating a small campus network with two core distribution switches, redundant links to access-layer switches, Inter-VLAN routing, Multi-Area OSPF, and DHCP services.
+
+
 ![topology Diagram](topology-Diagram.png)
-This project demonstrates a multi-switch enterprise network built in Cisco Packet Tracer, featuring:
-
-VLAN Segmentation — dividing the network across multiple access switches into separate VLANs
-
-OSPF Routing — dynamic routing between two core routers for inter-network communication
-
-Redundant Distribution Layer — two distribution switches (dSW1, dSW2) providing redundant links to access switches
 
 
+Overview
 
-The network consists of:
 
-2 Routers (R1, R2) — each connected to a distribution switch via Gig0/0/0, on separate subnets (10.1.1.0/24 and 10.1.2.0/24)
-2 Distribution Switches (dSW1, dSW2) — interconnected and cross-linked to all access switches for redundancy
-4 Access Switches (ASW1–ASW4) — connecting end devices
-8 PCs — distributed across the access switches
-2 Servers — connected to ASW4
-Key Configurations
-VLAN Setup
+2 Routers (R1, R2) — each connects to its own core switch via a routed link (Gig0/0):
+R1: 10.1.1.0/24
+R2: 10.1.2.0/24
+2 Core/Distribution Switches (Gsw-1, Gsw-2) — interconnected with each other and dual-homed to every access switch below, providing redundant uplinks:
+Gsw-1: Gig1/0/1–Gig1/0/6
+Gsw-2: Gig1/0/1–Gig1/0/5
+4 Access Switches (Sw1–Sw4) — each connects to both core switches for redundancy and hosts end devices on Fa0/1–Fa0/5:
+Sw1: PC1, PC2, PC3
+Sw2: PC4, PC5
+Sw3: PC6, PC7, PC8
+Sw4 (AS1): Server1, Server2
+8 PCs and 2 Servers connected at the access layer.
+Features Implemented
+Inter-VLAN Routing — routing between VLANs across the core switches and routers.
+Multi-Area OSPF — dynamic routing configured across multiple OSPF areas spanning R1 and R2.
+DHCP Server — provides automatic IP addressing to end-host PCs.
+Redundant Links — each access switch has dual uplinks to both core switches for fault tolerance.
+Files
+File	Description
+*.pkt	Cisco Packet Tracer project file
+network-diagram.png	Topology screenshot
+README.md	This file
+How to Use
+Open the .pkt file in Cisco Packet Tracer.
+Review device configurations (IP addressing, OSPF, VLANs, DHCP pools).
+Use the simulation/PDU tools to verify end-to-end connectivity between PCs and servers across VLANs and OSPF areas.
+Author
 
-Verification
-
-Show output of commands like show ip route, show ip ospf neighbor, show vlan brief, or successful ping tests between PCs/VLANs.
-
-Show output of commands like show ip route, show ip ospf neighbor, show vlan brief, or successful ping tests between PCs/VLANs.
-
-Tools Used
-Cisco Packet Tracer [version number]
-Project File
-
-The complete .pkt file is available in this repository under vlan-ospf-project/.
+Riya Patel
