@@ -1,5 +1,5 @@
 
-Multi-Site WAN with VLANs and DHCP Relay
+##Multi-Site WAN with VLANs and DHCP Relay
 
 A Cisco Packet Tracer project simulating a 3-site WAN (Dallas, Austin, and a third branch site) with VLAN segmentation, inter-VLAN routing via router sub-interfaces, and DHCP relay between sites.
 
@@ -67,9 +67,6 @@ A Cisco Packet Tracer project simulating a 3-site WAN (Dallas, Austin, and a thi
 - **Review router sub-interface** and **DHCP relay (`ip helper-address`)** configurations.
 - Use **Simulation mode** or **ping/PDUs** to verify connectivity across VLANs and between sites.
 
-## References
-
-- **Learned from the YouTube channel:** Channel Name
 
 ## Author
 
