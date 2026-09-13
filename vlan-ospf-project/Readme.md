@@ -42,3 +42,7 @@ Use the simulation/PDU tools to verify end-to-end connectivity between PCs and s
 Author
 
 Riya Patel
+
+## References
+
+- Learned from the YouTube channel: **The Last Hop Tech**
