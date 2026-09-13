@@ -1,165 +1,96 @@
 
 
 
+![topologydiagram05](-topology-diagram05.png)
 
 
-Site-to-Site IPsec VPN Configuration on Cisco ASA Firewall
- Overview
 
-This project demonstrates the configuration of a Site-to-Site IPsec VPN using a Cisco ASA Firewall in Cisco Packet Tracer.
+Site-to-Site IPSec VPN
 
-The VPN securely connects two separate networks over an untrusted/public network, allowing devices at both sites to communicate securely.
+A Cisco Packet Tracer project demonstrating a Site-to-Site IPSec VPN tunnel between an HQ site and a Branch site, secured through Cisco ASA 5506-X firewalls across an ISP router.
 
- Project Objectives
-Configure Cisco ASA Firewall
-Configure Site-to-Site IPsec VPN
-Configure IKE Phase 1
-Configure IPsec Phase 2
-Configure pre-shared authentication
-Configure encryption and hashing
-Configure VPN traffic using access lists
-Configure NAT exemption for VPN traffic
-Verify VPN connectivity
-Troubleshoot VPN connectivity problems
-🖥️ Network Topology
-LAN - Site A                         LAN - Site B
 
-PC-A ── Switch ── Router ── ASA-A ═════ ASA-B ── Router ── Switch ── PC-B
-                              │
-                         Internet/WAN
-                              │
-                       Site-to-Site VPN
-🔧 Technologies Used
-Cisco ASA Firewall
-Cisco Routers
-Cisco Switches
-Cisco Packet Tracer
-IPsec VPN
-IKE
-ISAKMP
-ACL
-NAT
-NAT Exemption
-Pre-shared Key
-AES Encryption
-SHA Hashing
-🌐 Example IP Addressing
-Device	Interface	IP Address
-Site A LAN	LAN	192.168.10.0/24
-ASA-A Outside	WAN	203.0.113.1/30
-ASA-A Inside	LAN	192.168.10.1/24
-ASA-B Outside	WAN	203.0.113.2/30
-ASA-B Inside	LAN	192.168.20.1/24
-Site B LAN	LAN	192.168.20.0/24
 
-Note: The IP addresses can be changed according to the topology used in the Packet Tracer project.
 
- VPN Configuration
-IKE Phase 1
+Topology Overview
 
-The VPN tunnel uses:
+## Network Topology
 
-IKE/ISAKMP
-Pre-shared key authentication
-AES encryption
-SHA hashing
-Diffie-Hellman key exchange
-IPsec Phase 2
+### HQ Site — Pink (`192.168.10.0/24`)
+- **Switch (2960-24TT)**
+  - Connects PC0 and PC1
+  - Uplink to Router1 (`Gig0/1`)
 
-IPsec is configured to provide secure communication between:
+- **Router1 — HQ Edge Router (2911)**
+  - `Gig0/0` → ASA0 (`Gig1/2`) — `10.10.10.0/30`
+  - `Gig0/1` → HQ LAN Switch
 
-Site A LAN: 192.168.10.0/24
-        ↕
-   IPsec VPN Tunnel
-        ↕
-Site B LAN: 192.168.20.0/24
- Main Configuration Components
-1. Interesting Traffic
+- **ASA0 — HQ Firewall (5506-X)**
+  - `Gig1/2` → Router1
+  - `Gig1/1` → ISP Router (`Gig0/0`) — `100.50.10.0/30`
 
-An ACL is configured to identify traffic that should travel through the VPN tunnel.
+- **ISP Router**
+  - `Gig0/0` → ASA0 — `100.50.10.0/30`
+  - `Gig0/1` → ASA1 — `100.50.10.4/30`
+  - Sits between the two ASA firewalls
 
-Site A LAN → Site B LAN
-2. NAT Exemption
+- **ASA1 — Branch Firewall (5506-X)**
+  - `Gig1/1` → ISP Router
+  - `Gig1/2` → Router2 — `10.10.10.4/30`
 
-VPN traffic is excluded from normal Internet NAT so that the original private IP addresses can be used across the tunnel.
+- **Router2 — Branch Edge Router**
+  - `Gig0/1` → ASA1
+  - `Gig0/0` → Branch LAN Switch
 
-3. IKE Policy
+### Branch Site — Blue (`192.168.20.0/24`)
+- **Switch (2960-24TT)**
+  - Connects PC2 and PC3
+  - Uplink to Router2
 
-The IKE policy defines the security parameters used to establish the VPN tunnel.
 
-4. IPsec Transform Set
 
-The transform set defines how traffic is encrypted and authenticated.
+## IP Addressing
 
-5. Crypto Map
+| Link | Subnet |
+|---|---|
+| Router1 ↔ ASA0 | `10.10.10.0/30` |
+| ASA0 ↔ ISP Router | `100.50.10.0/30` |
+| ISP Router ↔ ASA1 | `100.50.10.4/30` |
+| ASA1 ↔ Router2 | `10.10.10.4/30` |
+| HQ LAN | `192.168.10.0/24` |
+| Branch LAN | `192.168.20.0/24` |
 
-The crypto map connects the VPN policy to the outside interface of the ASA.
 
-🧪 Verification
+Features Implemented
+Site-to-Site IPSec VPN — configured between ASA0 (HQ) and ASA1 (Branch) to securely tunnel traffic between the HQ and Branch LANs over the ISP transit network.
 
-After configuration, the VPN can be verified using commands such as:
+ASA Firewalls — each site is protected by a Cisco ASA 5506-X sitting between the internal edge router and the public/ISP-facing link.
 
-show crypto isakmp sa
-show crypto ipsec sa
-show crypto map
-show access-list
-show running-config
-✅ Testing
+ISP Simulation — a router in the middle represents the public internet/ISP path the VPN tunnel traverses.
 
-The following tests are performed:
 
-Ping from Site A PC to Site B PC.
-Verify that the VPN tunnel is established.
-Check IKE Security Association.
-Check IPsec Security Association.
-Verify encrypted and decrypted packet counters.
-Troubleshoot connectivity if the tunnel does not establish.
-🛠️ Troubleshooting
 
-Common problems checked in this project include:
+Files
 
-Incorrect IP addresses
-Incorrect pre-shared key
-Incorrect ACL
-Incorrect crypto map
-NAT interfering with VPN traffic
-Incorrect IKE policy
-Incorrect IPsec transform set
-Missing routes
-Interface shutdown
-Incorrect VPN peer address
-📂 Project Files
-Site-to-Site-IPsec-VPN/
-│
-├── README.md
-├── Site-to-Site-IPsec-VPN.pkt
-└── screenshots/
-    ├── topology.png
-    ├── asa-configuration.png
-    └── vpn-verification.png
-📸 Screenshots
 
-Add screenshots of:
+## Project Files
 
-Network topology
-ASA configuration
-VPN configuration
-show crypto isakmp sa
-show crypto ipsec sa
-Successful ping between both sites
-🏆 Skills Demonstrated
+| File | Description |
+|---|---|
+| `*.pkt` | Cisco Packet Tracer project file |
+| `topology-diagram.png` | Topology screenshot |
+| `README.md` | Project documentation and configuration details |
 
-This project demonstrates practical knowledge of:
 
-Cisco ASA Firewall
-Network Security
-Site-to-Site VPN
-IPsec
-IKE/ISAKMP
-ACL
-NAT
-Network Troubleshooting
-Cisco Packet Tracer
-👨‍💻 Project Purpose
+How to Use
 
-This project was created as a hands-on networking and cybersecurity lab to understand how two remote networks can communicate securely using a Site-to-Site IPsec VPN through Cisco ASA Firewalls.
+
+Open the .pkt file in Cisco Packet Tracer.
+Review the ASA IPSec VPN configuration (ISAKMP/IKE Phase 1, IPSec Phase 2, crypto maps, ACLs matching interesting traffic).
+Ping between PC0/PC1 (HQ) and PC2/PC3 (Branch) to verify the VPN tunnel is passing traffic, and check ASA VPN status to confirm the tunnel is up.
+
+References
+Learned from the YouTube channel: RM TECH NETWORK 
+Author
+
+Riya Patel
