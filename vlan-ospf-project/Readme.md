@@ -1,5 +1,5 @@
 
-##Multi-Site WAN with VLANs and DHCP Relay
+**Multi-Site WAN with VLANs and DHCP Relay**
 
 A Cisco Packet Tracer project simulating a 3-site WAN (Dallas, Austin, and a third branch site) with VLAN segmentation, inter-VLAN routing via router sub-interfaces, and DHCP relay between sites.
 
