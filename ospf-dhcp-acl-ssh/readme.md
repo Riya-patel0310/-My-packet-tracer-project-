@@ -57,8 +57,12 @@ README.md	This file
 How to Use
 Open the .pkt file in Cisco Packet Tracer.
 Review router sub-interface and DHCP relay (ip helper-address) configurations.
-Use Simulation mode or ping/PDUs to verify connectivity across VLANs and between sites.
+Use Simulation mode or ping/PDUs to verify connectivity across VLANs and between sites
+
+.
 References
+
+
 Learned from the YouTube channel: Channel Name
 Author
 
