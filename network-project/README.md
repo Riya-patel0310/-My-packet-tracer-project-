@@ -1,5 +1,5 @@
 
-**Inter-VLAN Routing + Multi-Area OSPF + DHCP Server**
+##Inter-VLAN Routing + Multi-Area OSPF + DHCP Server##
 
 
 
@@ -12,7 +12,7 @@ A Cisco Packet Tracer project simulating a multi-area OSPF network connecting th
 
 
 
-** Overview**
+## Overview
 
 ## Topology Overview
 
